@@ -1,0 +1,20 @@
+version: '2'
+services:
+  base:
+    image: node:11
+    volumes:
+      - node-docker-nodemodules:/usr/src/node_modules
+      - ./src:/usr/src
+    environment:
+      - NODE_ENV=development
+    working_dir: /usr/src
+  install:
+    extends:
+      service: base
+    command: npm install
+  add:
+    extends: base
+    command: npm install ${PACKAGE_NAMES} ${OPTIONS} # TODO: figure this out
+volumes:
+  node-docker-nodemodules:
+    external: true

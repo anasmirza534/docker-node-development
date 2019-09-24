@@ -1,0 +1,16 @@
+version: '3'
+services:
+  dev:
+    image: node:11
+    volumes:
+      - node-docker-nodemodules:/usr/src/node_modules
+      - ./src:/usr/src
+    environment:
+      - NODE_ENV=development
+    working_dir: /usr/src
+    command: npm run dev
+    ports:
+      - 3000:3000
+volumes:
+  node-docker-nodemodules:
+    external: true
